@@ -1,195 +1,174 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { createClient } from "@/lib/supabase/client";
-import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { submitDonationReport } from "@/app/donate/actions";
 import { toast } from "sonner";
-import { CalendarIcon, Loader2 } from "lucide-react";
-
-// Form Schema
-const formSchema = z.object({
-  donorName: z.string().min(2, "請輸入收據抬頭"),
-  donorTaxId: z.string().optional(),
-  amount: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, "捐款金額必須大於 0"),
-  transferDate: z.string().refine((val) => !isNaN(Date.parse(val)), "請輸入有效日期"), // Using string input type="date"
-  last5Digits: z.string().length(5, "請輸入帳號末 5 碼").regex(/^\d+$/, "必須為數字"),
-  // receiptImage: z.instanceof(FileList)... (Fix SSR error)
-  receiptImage: z.any()
-    .refine((files) => typeof FileList !== 'undefined' && files instanceof FileList, "請上傳檔案")
-    .refine((files) => files?.length === 1, "請上傳一張匯款截圖"),
-});
+import { Loader2, UploadCloud } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+// ... imports
 
 export function DonationForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const supabase = createClient();
+  const [loading, setLoading] = useState(false);
+  const [fileName, setFileName] = useState<string>("");
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      donorName: "",
-      donorTaxId: "",
-      amount: "",
-      transferDate: new Date().toISOString().split("T")[0],
-      last5Digits: "",
-    },
-  });
+  // Default date to today
+  const today = new Date().toISOString().split('T')[0];
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const formElement = e.currentTarget;
+
     try {
-      const file = values.receiptImage[0];
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
-      const filePath = `donations/${fileName}`;
-
-      // 1. Upload Image
-      const { error: uploadError } = await supabase.storage
-        .from("receipts")
-        .upload(filePath, file);
-
-      if (uploadError) throw new Error("圖片上傳失敗: " + uploadError.message);
-
-      // 2. Insert Record
-      const { error: insertError } = await supabase.from("donations").insert({
-        donor_name: values.donorName,
-        donor_tax_id: values.donorTaxId,
-        amount: Number(values.amount),
-        transferDate: values.transferDate,
-        last_5_digits: values.last5Digits,
-        proof_image_url: filePath,
-        receipt_status: "pending",
-        user_id: null, // Guest donation
-      });
-
-      if (insertError) throw insertError;
-
-      toast.success("捐款回報成功！我們會儘快核對。");
-      form.reset();
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error.message || "發生錯誤，請稍後再試");
+      const res = await submitDonationReport(formData);
+      if (res.error) {
+        toast.error(res.error);
+      } else {
+        // toast.success("回報成功！我們會儘快進行核對。");
+        setShowSuccessDialog(true);
+        // Reset form
+        formElement.reset();
+        setFileName("");
+      }
+    } catch (error) {
+      toast.error("發生未預期的錯誤");
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
-  }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+    }
+  };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="donorName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>收據抬頭 (真實姓名)</FormLabel>
-              <FormControl>
-                <Input placeholder="王大明" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+    <>
+      <Card className="w-full max-w-2xl mx-auto shadow-lg bg-white/80 backdrop-blur-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center font-noto-sans-tc text-stone-800">
+            填寫匯款回報單
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="donor_name">捐款人姓名 <span className="text-red-500">*</span></Label>
+                <Input id="donor_name" name="donor_name" required placeholder="請輸入姓名" />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="amount">捐款金額 (TWD) <span className="text-red-500">*</span></Label>
+                <Input id="amount" name="amount" type="number" min="1" required placeholder="例如：1000" />
+              </div>
+            </div>
 
-        <FormField
-          control={form.control}
-          name="donorTaxId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>身分證/統編 (選填)</FormLabel>
-              <FormControl>
-                <Input placeholder="A123456789" {...field} />
-              </FormControl>
-              <FormDescription>若需申報抵稅請務必填寫</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="amount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>捐款金額</FormLabel>
-                <FormControl>
-                  <Input type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="last5Digits"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>帳號末五碼</FormLabel>
-                <FormControl>
-                  <Input placeholder="12345" maxLength={5} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <FormField
-          control={form.control}
-          name="transferDate"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>匯款日期</FormLabel>
-              <FormControl>
-                <Input type="date" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="receiptImage"
-          render={({ field: { ref, name, onBlur, onChange } }) => (
-            <FormItem>
-              <FormLabel>匯款成功截圖</FormLabel>
-              <FormControl>
-                <Input
-                  type="file"
-                  accept="image/*"
-                  ref={ref}
-                  name={name}
-                  onBlur={onBlur}
-                  onChange={(e) => {
-                    onChange(e.target.files);
-                  }}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="transfer_date">轉帳日期 <span className="text-red-500">*</span></Label>
+                <Input 
+                   id="transfer_date" 
+                   name="transfer_date" 
+                   type="date" 
+                   required
+                   defaultValue={today} 
                 />
-              </FormControl>
-              <FormDescription>請上傳網銀匯款成功畫面或明細</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="last_5_digits">帳號後五碼 <span className="text-red-500">*</span></Label>
+                <Input 
+                  id="last_5_digits" 
+                  name="last_5_digits" 
+                  maxLength={5} 
+                  required 
+                  placeholder="請輸入轉出帳號後五碼" 
+                />
+              </div>
+            </div>
 
-        <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              資料傳送中...
-            </>
-          ) : (
-            "送出回報"
-          )}
-        </Button>
-      </form>
-    </Form>
+            <div className="space-y-2">
+              <Label htmlFor="proof_image">轉帳明細截圖 (憑證) <span className="text-red-500">*</span></Label>
+              <div className="flex items-center gap-4">
+                 <div className="relative flex-1">
+                    <Input 
+                      id="proof_image" 
+                      name="proof_image" 
+                      type="file" 
+                      accept="image/*" 
+                      required 
+                      className="opacity-0 absolute inset-0 w-full h-full cursor-pointer z-10"
+                      onChange={handleFileChange}
+                    />
+                    <div className="flex items-center justify-center w-full border-2 border-dashed border-stone-300 rounded-lg p-6 bg-stone-50 hover:bg-stone-100 transition-colors">
+                       <div className="text-center">
+                          <UploadCloud className="mx-auto h-8 w-8 text-stone-400 mb-2" />
+                          <p className="text-sm text-stone-500 font-medium">
+                             {fileName ? fileName : "點擊上傳圖片"}
+                          </p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="note">備註留言 (選填)</Label>
+              <Textarea 
+                id="note" 
+                name="note" 
+                placeholder="有什麼想對我們或兔兔說的話嗎？" 
+                className="resize-none"
+              />
+            </div>
+
+            <Button type="submit" className="w-full text-lg h-12" disabled={loading}>
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  正在送出...
+                </>
+              ) : (
+                "送出回報"
+              )}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>感謝您的愛心！</AlertDialogTitle>
+            <AlertDialogDescription>
+              我們已經收到您的匯款回報。志工將於近期進行核對，確認無誤後將會開立收據寄送給您。
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setShowSuccessDialog(false)}>
+              好的，我知道了
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }

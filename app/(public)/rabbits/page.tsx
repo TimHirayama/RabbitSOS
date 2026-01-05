@@ -1,5 +1,5 @@
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+// import { Navbar } from "@/components/layout/Navbar";
+// import { Footer } from "@/components/layout/Footer";
 import { RabbitCard } from "@/components/feature/RabbitCard";
 import { RabbitFilters } from "@/components/feature/RabbitFilters";
 import { createClient } from "@/lib/supabase/server";
@@ -28,14 +28,34 @@ export default async function RabbitsPage({
   }
   
   if (resolvedParams.location && resolvedParams.location !== "all") {
-     query = query.eq("location", resolvedParams.location as string);
+     const loc = resolvedParams.location as string;
+     
+     // Map location keys to likely Chinese text in database
+     if (loc === 'Taipei') {
+       query = query.ilike('location', '%台北%');
+     } else if (loc === 'NewTaipei') {
+       query = query.ilike('location', '%新北%');
+     } else if (loc === 'Taoyuan') {
+       query = query.ilike('location', '%桃園%');
+     } else if (loc === 'Taichung') {
+       // Handle both 台中 and 臺中
+       query = query.or('location.ilike.%台中%,location.ilike.%臺中%');
+     } else if (loc === 'Kaohsiung') {
+       query = query.ilike('location', '%高雄%');
+     } else if (loc === 'Other') {
+        // Hard to filter 'Other' cleanly with free text, maybe skip or fuzzy match logic? 
+        // For now let's just ignore or match exact if somehow stored as 'Other'
+        query = query.eq('location', 'Other');
+     } else {
+        // Fallback for custom values
+        query = query.eq('location', loc);
+     }
   }
 
   const { data: rabbits, error } = await query;
 
   return (
     <div className="flex min-h-screen flex-col bg-stone-50">
-      <Navbar />
       
       <main className="flex-1 container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-2 font-noto-sans-tc">尋找家人</h1>
@@ -73,8 +93,6 @@ export default async function RabbitsPage({
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

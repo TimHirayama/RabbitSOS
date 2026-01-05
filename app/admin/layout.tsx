@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { AdminSidebar } from "./_components/sidebar";
+import { AdminMobileNav } from "./_components/mobile-nav";
 
 export default async function AdminLayout({
   children,
@@ -22,7 +23,7 @@ export default async function AdminLayout({
   // Check Role
   const { data: profile, error } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, full_name, email")
     .eq("id", user.id)
     .single();
 
@@ -43,9 +44,13 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-screen w-full bg-muted/40">
-      <AdminSidebar role={profile.role} />
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14 lg:pl-64 w-full">
-        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+      <AdminSidebar profile={profile} />
+      <div className="flex flex-col lg:pl-64 w-full">
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 lg:hidden">
+           <AdminMobileNav profile={profile} />
+           <span className="font-semibold">RabbitSOS Admin</span>
+        </header>
+        <main className="grid flex-1 items-start gap-4 p-4 lg:gap-8 lg:p-6">
           {children}
         </main>
       </div>

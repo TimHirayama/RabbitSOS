@@ -3,6 +3,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 
+import { logAdminAction } from '@/lib/audit-logger'
+
 export async function verifyDonation(id: string) {
   const supabase = await createClient()
 
@@ -22,6 +24,8 @@ export async function verifyDonation(id: string) {
     return { error: error.message }
   }
 
+  await logAdminAction('VERIFY_DONATION', `donation_${id}`, { receipt_no })
+
   revalidatePath('/admin/donations')
   return { success: true }
 }
@@ -37,6 +41,27 @@ export async function rejectDonation(id: string, note: string) {
   if (error) {
     return { error: error.message }
   }
+
+  await logAdminAction('REJECT_DONATION', `donation_${id}`, { note })
+
+  revalidatePath('/admin/donations')
+  return { success: true }
+}
+
+export async function revertDonation(id: string) {
+  const supabase = await createClient()
+
+  const { error } = await supabase.from('donations').update({
+    receipt_status: 'pending',
+    receipt_no: null,
+    admin_note: null
+  }).eq('id', id)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  await logAdminAction('REVERT_DONATION', `donation_${id}`, {})
 
   revalidatePath('/admin/donations')
   return { success: true }

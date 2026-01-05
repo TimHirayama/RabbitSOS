@@ -47,6 +47,10 @@ export function RabbitForm({ initialData }: RabbitFormProps) {
       }
       // Redirect handled in server action but good to have fallback or client side redirect awareness
     } catch (error: any) {
+      if (error.message === "NEXT_REDIRECT" || error.digest?.includes("NEXT_REDIRECT")) {
+         // This is expected behavior for server action redirect
+         return; 
+      }
       toast.error("儲存失敗: " + error.message);
     } finally {
       setLoading(false);
@@ -112,13 +116,25 @@ export function RabbitForm({ initialData }: RabbitFormProps) {
         </div>
 
         <div className="grid gap-2">
-          <Label htmlFor="location">所在地</Label>
-          <Input 
-            id="location" 
-            name="location" 
-            defaultValue={initialData?.location} 
-            placeholder="台北市 / 中途之家" 
-          />
+          <Label htmlFor="location">所在地 (縣市)</Label>
+          <Select name="location" defaultValue={initialData?.location || "台北市"}>
+            <SelectTrigger>
+              <SelectValue placeholder="選擇所在縣市" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="台北市">台北市</SelectItem>
+              <SelectItem value="新北市">新北市</SelectItem>
+              <SelectItem value="桃園市">桃園市</SelectItem>
+              <SelectItem value="新竹縣市">新竹縣市</SelectItem>
+              <SelectItem value="台中市">台中市</SelectItem>
+              <SelectItem value="台南市">台南市</SelectItem>
+              <SelectItem value="高雄市">高雄市</SelectItem>
+              <SelectItem value="基隆市">基隆市</SelectItem>
+              <SelectItem value="宜蘭縣">宜蘭縣</SelectItem>
+              <SelectItem value="花蓮縣">花蓮縣</SelectItem>
+              <SelectItem value="其他">其他地區</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="grid gap-2">

@@ -39,7 +39,6 @@ export default async function RabbitDetailPage({
 
   return (
     <div className="flex min-h-screen flex-col bg-stone-50">
-      <Navbar />
       
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
@@ -118,7 +117,6 @@ export default async function RabbitDetailPage({
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

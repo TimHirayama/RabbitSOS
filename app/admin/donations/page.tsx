@@ -8,15 +8,105 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { VerifyButton, RejectButton } from "./_components/action-buttons";
-import { ExternalLink } from "lucide-react";
+import { VerifyButton, IssueButton, RevertButton } from "./_components/action-buttons";
+import { format } from "date-fns";
+import { ExternalLink, Download } from "lucide-react";
+import { ReceiptModal } from "./_components/receipt-modal";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { AdminSearchFilters } from "@/components/admin/AdminSearchFilters";
+import React from 'react';
+import { PaginationControls } from "./_components/pagination-controls";
 
-export default async function AdminDonationsPage() {
+const PAGE_SIZE = 20;
+
+// Wrapper to avoid excessive client component nesting if not needed
+function AddressButtonsWrapper({ id }: { id: string }) {
+   return (
+      <>
+         <VerifyButton id={id} />
+         <IssueButton id={id} />
+      </>
+   )
+}
+
+export default async function AdminDonationsPage(props: {
+  searchParams: Promise<{
+    q?: string;
+    status?: string;
+    page?: string;
+  }>;
+}) {
+  const params = await props.searchParams;
+  const page = Number(params.page) || 1;
+  const from = (page - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+
   const supabase = await createClient();
-  const { data: donations } = await supabase
+  
+  let query = supabase
     .from("donations")
-    .select("*")
-    .order("created_at", { ascending: false });
+    .select("*", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
+  // Apply Smart Search
+  const q = params.q?.trim();
+  if (q) {
+    const statusMap: Record<string, string> = {
+       '待核對': 'pending', 'pending': 'pending',
+       '已核銷': 'verified', 'verified': 'verified',
+       '有問題': 'issue', 'issue': 'issue'
+    };
+    const mappedStatus = statusMap[q] || statusMap[q.toLowerCase()];
+
+    // Date Pattern: YYYY-MM (e.g., 2026-01)
+    const datePattern = /^\d{4}-\d{2}$/;
+
+    if (mappedStatus) {
+       query = query.eq('receipt_status', mappedStatus);
+    } else if (datePattern.test(q)) {
+       const [year, month] = q.split('-').map(Number);
+       if (!isNaN(year) && !isNaN(month)) {
+           // Use string manipulation to avoid timezone issues with Date object
+           const startDateStr = `${year}-${String(month).padStart(2, '0')}-01`;
+           let endYear = year;
+           let endMonth = month + 1;
+           if (endMonth > 12) {
+             endYear = year + 1;
+             endMonth = 1;
+           }
+           const endDateStr = `${endYear}-${String(endMonth).padStart(2, '0')}-01`;
+           
+           query = query.gte('transfer_date', startDateStr)
+                        .lt('transfer_date', endDateStr);
+       }
+    } else {
+       // Text Search (Name, Tax ID, Last 5)
+       // Exclude Date column to prevent casting errors
+       query = query.or(`donor_name.ilike.%${q}%,last_5_digits.ilike.%${q}%,donor_tax_id.ilike.%${q}%`);
+    }
+  }
+
+  // Remove old status filter logic
+  
+  const { data: donations, count } = await query;
+  const totalPages = count ? Math.ceil(count / PAGE_SIZE) : 0;
+
+  // Generate signed URLs for private images
+  const donationsWithUrls = await Promise.all(
+    (donations || []).map(async (donation) => {
+      let signedUrl = null;
+      if (donation.proof_image_url) {
+        const { data } = await supabase.storage
+          .from("receipts")
+          .createSignedUrl(donation.proof_image_url, 60 * 60); // 1 hour expiry
+        signedUrl = data?.signedUrl;
+      }
+      return { ...donation, signed_url: signedUrl };
+    })
+  );
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -45,7 +135,12 @@ export default async function AdminDonationsPage() {
         </p>
       </div>
 
-      <div className="rounded-md border">
+      <AdminSearchFilters 
+         placeholder="搜尋捐款人、後五碼或統編..." 
+      />
+
+      {/* Desktop Table View */}
+      <div className="rounded-md border hidden md:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -54,17 +149,18 @@ export default async function AdminDonationsPage() {
               <TableHead>金額</TableHead>
               <TableHead>帳號後五碼</TableHead>
               <TableHead>匯款憑證</TableHead>
+              <TableHead>備註</TableHead>
               <TableHead>狀態</TableHead>
               <TableHead className="text-right">操作</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {donations?.map((donation) => (
+            {donationsWithUrls?.map((donation: any) => (
               <TableRow key={donation.id}>
                 <TableCell>
-                   {donation.transfer_date ? new Date(donation.transfer_date).toLocaleDateString() : '-'}
+                   {donation.transfer_date ? format(new Date(donation.transfer_date), "yyyy/MM/dd") : '-'}
                    <div className="text-xs text-muted-foreground">
-                      Report: {new Date(donation.created_at).toLocaleDateString()}
+                      Report: {format(new Date(donation.created_at), "yyyy/MM/dd")}
                    </div>
                 </TableCell>
                 <TableCell className="font-medium">
@@ -76,13 +172,22 @@ export default async function AdminDonationsPage() {
                 </TableCell>
                 <TableCell>{donation.last_5_digits || '-'}</TableCell>
                 <TableCell>
-                  {donation.proof_image_url ? (
-                    <a href={donation.proof_image_url} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:underline">
-                      查看圖片 <ExternalLink className="ml-1 h-3 w-3" />
-                    </a>
-                  ) : (
-                    <span className="text-muted-foreground">-</span>
-                  )}
+                  <ReceiptModal url={donation.signed_url} />
+                </TableCell>
+                <TableCell className="max-w-xs text-sm">
+                   {donation.note && (
+                      <div className="mb-1 text-stone-700">
+                         <span className="text-xs text-muted-foreground mr-1">User:</span>
+                         {donation.note}
+                      </div>
+                   )}
+                   {donation.admin_note && (
+                      <div className="text-red-600 font-medium">
+                         <span className="text-xs text-red-400 mr-1">Issue:</span>
+                         {donation.admin_note}
+                      </div>
+                   )}
+                   {!donation.note && !donation.admin_note && <span className="text-muted-foreground">-</span>}
                 </TableCell>
                 <TableCell>
                   <Badge variant={getStatusColor(donation.receipt_status) as any}>
@@ -96,9 +201,22 @@ export default async function AdminDonationsPage() {
                        <AddressButtonsWrapper id={donation.id} />
                     </div>
                   )}
-                  {donation.receipt_status !== 'pending' && (
-                     <div className="text-xs text-muted-foreground">
-                        {donation.admin_note || "Completed"}
+                  {donation.receipt_status === 'verified' && (
+                    <div className="flex flex-col gap-1 items-end">
+                       <div className="flex items-center gap-1">
+                          <Link href={`/donate/receipt/${donation.id}`} target="_blank">
+                             <Button size="sm" variant="outline" className="h-7 text-xs flex items-center gap-1 border-green-200 text-green-700 bg-green-50 hover:bg-green-100">
+                                <Download className="h-3 w-3" />
+                                下載收據
+                             </Button>
+                          </Link>
+                          <RevertButton id={donation.id} />
+                       </div>
+                    </div>
+                  )}
+                  {donation.receipt_status === 'issue' && (
+                     <div className="flex justify-end">
+                        <RevertButton id={donation.id} />
                      </div>
                   )}
                 </TableCell>
@@ -114,19 +232,80 @@ export default async function AdminDonationsPage() {
           </TableBody>
         </Table>
       </div>
+
+      {/* Mobile Card View */}
+      <div className="space-y-4 md:hidden">
+        {donationsWithUrls?.map((donation: any) => (
+            <Card key={donation.id}>
+               <CardHeader className="pb-2">
+                  <div className="flex justify-between items-start">
+                     <div>
+                        <CardTitle className="text-base">{donation.donor_name}</CardTitle>
+                        <div className="text-sm text-muted-foreground">{format(new Date(donation.transfer_date), "yyyy/MM/dd")}</div>
+                     </div>
+                     <div className="text-right">
+                        <span className="text-lg font-bold text-green-600 block">${donation.amount.toLocaleString()}</span>
+                         <Badge variant={getStatusColor(donation.receipt_status) as any} className="mt-1">
+                            {getStatusLabel(donation.receipt_status)}
+                         </Badge>
+                     </div>
+                  </div>
+               </CardHeader>
+               <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-2 text-sm bg-slate-50 p-3 rounded">
+                     <div className="flex flex-col">
+                        <span className="text-muted-foreground text-xs">後五碼</span>
+                        <span className="font-medium">{donation.last_5_digits || '-'}</span>
+                     </div>
+                     <div className="flex flex-col">
+                        <span className="text-muted-foreground text-xs">統編</span>
+                        <span className="font-medium">{donation.donor_tax_id || '-'}</span>
+                     </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between pt-2">
+                      <div className="flex items-center gap-2">
+                         <span className="text-sm text-muted-foreground">憑證:</span>
+                         <ReceiptModal url={donation.signed_url} />
+                      </div>
+                      
+                      {donation.receipt_status === 'pending' && (
+                         <div className="flex gap-2">
+                            <AddressButtonsWrapper id={donation.id} />
+                         </div>
+                      )}
+                  </div>
+                  
+                  {donation.receipt_status !== 'pending' && donation.admin_note && (
+                      <div className="text-xs text-muted-foreground bg-muted p-2 rounded">
+                         管理員備註: {donation.admin_note}
+                      </div>
+                  )}
+                  {donation.note && (
+                      <div className="text-xs text-stone-500 bg-stone-50 p-2 rounded border border-stone-100">
+                         備註: {donation.note}
+                      </div>
+                  )}
+                  {donation.receipt_status === 'verified' && (
+                     <Link href={`/donate/receipt/${donation.id}`} target="_blank" className="block mt-2">
+                        <Button variant="outline" className="w-full border-green-200 text-green-700 bg-green-50 hover:bg-green-100">
+                           <Download className="mr-2 h-4 w-4" />
+                           下載收據
+                        </Button>
+                     </Link>
+                  )}
+               </CardContent>
+            </Card>
+        ))}
+        {!donations?.length && (
+            <div className="text-center py-8 text-muted-foreground border rounded-lg border-dashed">
+                尚無紀錄
+            </div>
+        )}
+        <div className="mt-4">
+           <PaginationControls currentPage={page} totalPages={totalPages} />
+        </div>
+      </div>
     </div>
   );
-}
-
-// Wrapper to avoid excessive client component nesting if not needed, 
-// strictly speaking VerifyButton and RejectButton are client components, 
-// so we can use them directly.
-import React from 'react';
-function AddressButtonsWrapper({ id }: { id: string }) {
-   return (
-      <>
-         <VerifyButton id={id} />
-         <RejectButton id={id} />
-      </>
-   )
 }

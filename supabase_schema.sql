@@ -145,5 +145,99 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 
--- Helper function for Admin Check
--- (Recursed above in policies)
+-- 5. Audit Logs Table
+create table audit_logs (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid references profiles(id) on delete set null,
+  action text not null, -- e.g. 'CREATE_RABBIT', 'VERIFY_DONATION'
+  target_resource text, -- e.g. 'rabbit_123'
+  details jsonb, -- e.g. { "name": "小白" }
+  created_at timestamptz default now()
+);
+
+-- Enable RLS for Audit Logs
+alter table audit_logs enable row level security;
+
+-- Audit Logs Policies
+create policy "Admins and Volunteers can view audit logs"
+  on audit_logs for select using (
+    exists (select 1 from profiles where id = auth.uid() and role in ('admin', 'volunteer'))
+  );
+
+
+-- 6. Banners Table (Homepage Slider)
+create table banners (
+  id uuid default gen_random_uuid() primary key,
+  title text, -- Optional Alt Text
+  image_path text not null, -- Storage Path (banners/filename)
+  link_url text, -- Optional Redirect URL
+  display_mode text default 'contained' check (display_mode in ('contained', 'full')),
+  sort_order int default 0,
+  is_active boolean default true,
+  created_at timestamptz default now()
+);
+
+-- Enable RLS
+alter table banners enable row level security;
+
+-- Policies
+create policy "Public can view active banners"
+  on banners for select
+  using (is_active = true);
+
+create policy "Admins and Volunteers can manage banners"
+  on banners for all
+  using (
+    exists (select 1 from profiles where id = auth.uid() and role in ('admin', 'volunteer'))
+  );
+
+
+-- 7. Banners Storage Bucket
+insert into storage.buckets (id, name, public) 
+values ('banners', 'banners', true) 
+on conflict (id) do nothing;
+
+create policy "Public Access Banners"
+  on storage.objects for select
+  using ( bucket_id = 'banners' );
+
+create policy "Admin Insert Banners"
+  on storage.objects for insert
+  with check (
+    bucket_id = 'banners' AND
+    exists (select 1 from profiles where id = auth.uid() and role in ('admin', 'volunteer'))
+  );
+
+create policy "Admin Delete Banners"
+  on storage.objects for delete
+  using (
+    bucket_id = 'banners' AND
+    exists (select 1 from profiles where id = auth.uid() and role in ('admin', 'volunteer'))
+  );
+
+-- 8. Site Settings (Key-Value Store)
+create table site_settings (
+  key text primary key,
+  value text,
+  description text,
+  updated_at timestamptz default now()
+);
+
+-- RLS
+alter table site_settings enable row level security;
+
+create policy "Public Access Settings"
+  on site_settings for select
+  using (true);
+
+create policy "Admin Manage Settings"
+  on site_settings for all
+  using (
+    exists (select 1 from profiles where id = auth.uid() and role in ('admin', 'volunteer'))
+  );
+
+-- Initialize defaults
+insert into site_settings (key, value, description) 
+values ('banner_layout', 'contained', 'Homepage banner layout: contained or full')
+on conflict (key) do nothing;
+

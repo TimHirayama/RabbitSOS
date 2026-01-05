@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { logAdminAction } from '@/lib/audit-logger'
+
 export async function createRabbit(formData: FormData) {
   const supabase = await createClient()
 
@@ -19,7 +21,7 @@ export async function createRabbit(formData: FormData) {
   // but let's assume client sends multiple inputs or a JSON string.
   // Actually, standard FormData getAll works if multiple inputs have same name.
 
-  const { error } = await supabase.from('rabbits').insert({
+  const { data, error } = await supabase.from('rabbits').insert({
     name,
     status,
     gender,
@@ -27,11 +29,13 @@ export async function createRabbit(formData: FormData) {
     location,
     description,
     image_urls,
-  })
+  }).select().single()
 
   if (error) {
     return { error: error.message }
   }
+  
+  await logAdminAction('CREATE_RABBIT', `rabbit_${data.id}`, { name, status })
 
   revalidatePath('/admin/rabbits')
   redirect('/admin/rabbits')
@@ -62,6 +66,8 @@ export async function updateRabbit(id: string, formData: FormData) {
     return { error: error.message }
   }
 
+  await logAdminAction('UPDATE_RABBIT', `rabbit_${id}`, { name, status })
+
   revalidatePath('/admin/rabbits')
   revalidatePath(`/admin/rabbits/${id}`)
   redirect('/admin/rabbits')
@@ -75,6 +81,8 @@ export async function deleteRabbit(id: string) {
   if (error) {
      return { error: error.message }
   }
+
+  await logAdminAction('DELETE_RABBIT', `rabbit_${id}`)
   
   revalidatePath('/admin/rabbits')
 }
