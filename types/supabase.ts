@@ -39,7 +39,7 @@ export interface Database {
         Row: {
           id: string
           name: string
-          status: 'open' | 'reserved' | 'medical' | 'closed'
+          status: 'open' | 'reserved' | 'medical' | 'closed' | 'adopted' | 'rainbow'
           gender: 'M' | 'F' | 'unknown' | null
           age_year: number | null
           location: string | null
@@ -51,7 +51,7 @@ export interface Database {
         Insert: {
           id?: string
           name: string
-          status?: 'open' | 'reserved' | 'medical' | 'closed'
+          status?: 'open' | 'reserved' | 'medical' | 'closed' | 'adopted' | 'rainbow'
           gender?: 'M' | 'F' | 'unknown' | null
           age_year?: number | null
           location?: string | null
@@ -63,7 +63,7 @@ export interface Database {
         Update: {
           id?: string
           name?: string
-          status?: 'open' | 'reserved' | 'medical' | 'closed'
+          status?: 'open' | 'reserved' | 'medical' | 'closed' | 'adopted' | 'rainbow'
           gender?: 'M' | 'F' | 'unknown' | null
           age_year?: number | null
           location?: string | null
@@ -77,9 +77,10 @@ export interface Database {
         Row: {
           id: string
           title: string
-          category: 'news' | 'knowledge' | 'event'
+          category: 'news' | 'knowledge' | 'event' | 'rescue' | 'financial'
           content: string | null
           cover_image: string | null
+          file_url: string | null
           published: boolean | null
           published_at: string | null
           created_at: string | null
@@ -87,9 +88,10 @@ export interface Database {
         Insert: {
           id?: string
           title: string
-          category?: 'news' | 'knowledge' | 'event'
+          category?: 'news' | 'knowledge' | 'event' | 'rescue' | 'financial'
           content?: string | null
           cover_image?: string | null
+          file_url?: string | null
           published?: boolean | null
           published_at?: string | null
           created_at?: string | null
@@ -97,9 +99,10 @@ export interface Database {
         Update: {
           id?: string
           title?: string
-          category?: 'news' | 'knowledge' | 'event'
+          category?: 'news' | 'knowledge' | 'event' | 'rescue' | 'financial'
           content?: string | null
           cover_image?: string | null
+          file_url?: string | null
           published?: boolean | null
           published_at?: string | null
           created_at?: string | null
@@ -110,11 +113,15 @@ export interface Database {
           id: string
           user_id: string | null
           donor_name: string
+          donor_phone: string | null
+          donor_email: string | null
           donor_tax_id: string | null
           amount: number
           transfer_date: string | null
           last_5_digits: string | null
           proof_image_url: string | null
+          receipt_title: string | null
+          receipt_address: string | null
           receipt_status: 'pending' | 'verified' | 'issue'
           receipt_no: string | null
           admin_note: string | null
@@ -124,11 +131,15 @@ export interface Database {
           id?: string
           user_id?: string | null
           donor_name: string
+          donor_phone?: string | null
+          donor_email?: string | null
           donor_tax_id?: string | null
           amount: number
           transfer_date?: string | null
           last_5_digits?: string | null
           proof_image_url?: string | null
+          receipt_title?: string | null
+          receipt_address?: string | null
           receipt_status?: 'pending' | 'verified' | 'issue'
           receipt_no?: string | null
           admin_note?: string | null
@@ -138,14 +149,50 @@ export interface Database {
           id?: string
           user_id?: string | null
           donor_name?: string
+          donor_phone?: string | null
+          donor_email?: string | null
           donor_tax_id?: string | null
           amount?: number
           transfer_date?: string | null
           last_5_digits?: string | null
           proof_image_url?: string | null
+          receipt_title?: string | null
+          receipt_address?: string | null
           receipt_status?: 'pending' | 'verified' | 'issue'
           receipt_no?: string | null
           admin_note?: string | null
+          created_at?: string | null
+        }
+      }
+      banners: {
+        Row: {
+          id: string
+          title: string | null
+          image_path: string
+          link_url: string | null
+          display_mode: 'contained' | 'full'
+          sort_order: number | null
+          is_active: boolean | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          title?: string | null
+          image_path: string
+          link_url?: string | null
+          display_mode?: 'contained' | 'full'
+          sort_order?: number | null
+          is_active?: boolean | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          title?: string | null
+          image_path?: string
+          link_url?: string | null
+          display_mode?: 'contained' | 'full'
+          sort_order?: number | null
+          is_active?: boolean | null
           created_at?: string | null
         }
       }

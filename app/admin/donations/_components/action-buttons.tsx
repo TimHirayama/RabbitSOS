@@ -35,7 +35,7 @@ export function VerifyButton({ id }: { id: string }) {
   const handleVerify = async () => {
     setLoading(true);
     const res = await verifyDonation(id);
-    if (res.error) toast.error(res.error);
+    if (!res.success) toast.error(res.error || "操作失敗");
     else {
       toast.success("已核銷成功");
       setOpen(false);
@@ -75,7 +75,7 @@ export function IssueButton({ id }: { id: string }) {
 
   const handleIssue = async () => {
     const res = await rejectDonation(id, note);
-    if (res.error) toast.error(res.error);
+    if (!res.success) toast.error(res.error || "操作失敗");
     else {
       toast.success("已標記為有問題");
       setOpen(false);
@@ -115,7 +115,7 @@ export function RevertButton({ id }: { id: string }) {
   const handleRevert = async () => {
     setLoading(true);
     const res = await revertDonation(id);
-    if (res.error) toast.error(res.error);
+    if (!res.success) toast.error(res.error || "操作失敗");
     else {
       toast.success("已復原為待核對狀態");
       setOpen(false);

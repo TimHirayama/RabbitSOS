@@ -36,21 +36,24 @@ export function RabbitForm({ initialData }: RabbitFormProps) {
     imageUrls.forEach(url => formData.append('image_urls', url));
 
     try {
+      let res;
       if (initialData) {
-        const res = await updateRabbit(initialData.id, formData);
-        if (res?.error) throw new Error(res.error);
-        toast.success("更新成功");
+        res = await updateRabbit(initialData.id, formData);
       } else {
-        const res = await createRabbit(formData);
-        if (res?.error) throw new Error(res.error);
-        toast.success("新增成功");
+        res = await createRabbit(formData);
       }
-      // Redirect handled in server action but good to have fallback or client side redirect awareness
+
+      if (!res.success) {
+        console.log("API Error Response:", res);
+        throw new Error(res.error || "操作失敗");
+      }
+      
+      console.log("API Success Response:", res);
+      
+      toast.success(initialData ? "更新成功" : "新增成功");
+      router.push('/admin/rabbits');
+      router.refresh();
     } catch (error: any) {
-      if (error.message === "NEXT_REDIRECT" || error.digest?.includes("NEXT_REDIRECT")) {
-         // This is expected behavior for server action redirect
-         return; 
-      }
       toast.error("儲存失敗: " + error.message);
     } finally {
       setLoading(false);
@@ -84,6 +87,8 @@ export function RabbitForm({ initialData }: RabbitFormProps) {
                 <SelectItem value="open">開放認養 (Open)</SelectItem>
                 <SelectItem value="reserved">已預訂 (Reserved)</SelectItem>
                 <SelectItem value="medical">醫療中 (Medical)</SelectItem>
+                <SelectItem value="adopted">已送養 (Adopted)</SelectItem>
+                <SelectItem value="rainbow">當天使 (Rainbow)</SelectItem>
                 <SelectItem value="closed">已結案 (Closed)</SelectItem>
               </SelectContent>
             </Select>

@@ -18,6 +18,7 @@ import Link from "next/link";
 import { AdminSearchFilters } from "@/components/admin/AdminSearchFilters";
 import React from 'react';
 import { PaginationControls } from "./_components/pagination-controls";
+import { DownloadReceiptButton } from "./_components/download-receipt-button";
 
 const PAGE_SIZE = 20;
 
@@ -165,7 +166,10 @@ export default async function AdminDonationsPage(props: {
                 </TableCell>
                 <TableCell className="font-medium">
                   {donation.donor_name}
-                  {donation.donor_tax_id && <div className="text-xs text-muted-foreground">統編: {donation.donor_tax_id}</div>}
+                  <div className="text-xs text-muted-foreground">{donation.donor_phone || '-'}</div>
+                  {donation.donor_email && <div className="text-xs text-muted-foreground">{donation.donor_email}</div>}
+                  {donation.receipt_address && <div className="text-xs text-muted-foreground truncate max-w-[150px]" title={donation.receipt_address}>{donation.receipt_address}</div>}
+                  {donation.donor_tax_id && <div className="text-xs text-muted-foreground">统編: {donation.donor_tax_id}</div>}
                 </TableCell>
                 <TableCell className="font-bold text-green-600">
                   ${donation.amount.toLocaleString()}
@@ -204,12 +208,7 @@ export default async function AdminDonationsPage(props: {
                   {donation.receipt_status === 'verified' && (
                     <div className="flex flex-col gap-1 items-end">
                        <div className="flex items-center gap-1">
-                          <Link href={`/donate/receipt/${donation.id}`} target="_blank">
-                             <Button size="sm" variant="outline" className="h-7 text-xs flex items-center gap-1 border-green-200 text-green-700 bg-green-50 hover:bg-green-100">
-                                <Download className="h-3 w-3" />
-                                下載收據
-                             </Button>
-                          </Link>
+                          <DownloadReceiptButton donation={donation} />
                           <RevertButton id={donation.id} />
                        </div>
                     </div>
@@ -242,6 +241,7 @@ export default async function AdminDonationsPage(props: {
                      <div>
                         <CardTitle className="text-base">{donation.donor_name}</CardTitle>
                         <div className="text-sm text-muted-foreground">{format(new Date(donation.transfer_date), "yyyy/MM/dd")}</div>
+                        <div className="text-xs text-stone-500 mt-1">{donation.donor_phone}</div>
                      </div>
                      <div className="text-right">
                         <span className="text-lg font-bold text-green-600 block">${donation.amount.toLocaleString()}</span>
@@ -287,12 +287,9 @@ export default async function AdminDonationsPage(props: {
                       </div>
                   )}
                   {donation.receipt_status === 'verified' && (
-                     <Link href={`/donate/receipt/${donation.id}`} target="_blank" className="block mt-2">
-                        <Button variant="outline" className="w-full border-green-200 text-green-700 bg-green-50 hover:bg-green-100">
-                           <Download className="mr-2 h-4 w-4" />
-                           下載收據
-                        </Button>
-                     </Link>
+                     <div className="mt-2">
+                        <DownloadReceiptButton donation={donation} />
+                     </div>
                   )}
                </CardContent>
             </Card>

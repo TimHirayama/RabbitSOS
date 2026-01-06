@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { searchDonation, SearchState } from "./actions";
+import { searchDonation, SearchResult } from "./actions";
+import { ApiResponse } from "@/types/api";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -14,9 +15,18 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { format } from "date-fns";
 import { Separator } from "@/components/ui/separator";
+import dynamic from "next/dynamic";
+import { ReceiptDocument } from "@/components/feature/ReceiptDocument";
 
-const initialState: SearchState = {
-  error: null,
+const PDFDownloadLink = dynamic(
+  () => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+  {
+    ssr: false,
+    loading: () => <Button variant="outline" disabled>載入PDF引擎...</Button>,
+  }
+);
+
+const initialState: ApiResponse<SearchResult[]> = {
   success: false,
   data: [],
 };
@@ -41,10 +51,15 @@ function SubmitButton() {
 }
 
 export default function CheckDonationPage() {
-  const [state, formAction] = useFormState<SearchState, FormData>(
+  const [state, formAction] = useFormState<ApiResponse<SearchResult[]>, FormData>(
     searchDonation,
     initialState
   );
+
+  // Debug: Log response for verification
+  if (state.success || state.error) {
+    console.log("Donation Search API Response:", state);
+  }
   const [verifyType, setVerifyType] = useState("digits");
 
   return (
@@ -143,12 +158,41 @@ export default function CheckDonationPage() {
                   </div>
 
                   {donation.status === "verified" ? (
-                     <Link href={`/donate/receipt/${donation.id}`} target="_blank">
-                        <Button variant="outline" className="border-green-600 text-green-700 hover:bg-green-50">
-                           <Download className="mr-2 h-4 w-4" />
-                           下載收據
-                        </Button>
-                     </Link>
+                      <div className="flex flex-col gap-2">
+                         <PDFDownloadLink
+                            document={
+                               <ReceiptDocument 
+                                  receiptNo={donation.receipt_no || "N/A"}
+                                  date={format(new Date(donation.created_at), "yyyy-MM-dd")}
+                                  donorName={donation.donor_name}
+                                  taxId={donation.donor_tax_id || undefined}
+                                  amount={donation.amount}
+                               />
+                            }
+                            fileName={`donation_receipt_${donation.receipt_no || donation.id}.pdf`}
+                         >
+                            {/* @ts-ignore - render props type mismatch often happens with this lib */}
+                            {({ blob, url, loading, error }: any) => (
+                               <Button 
+                                  variant="outline" 
+                                  className="border-green-600 text-green-700 hover:bg-green-50 w-full"
+                                  disabled={loading}
+                               >
+                                  {loading ? (
+                                    <>
+                                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                       產生中...
+                                    </>
+                                  ) : (
+                                    <>
+                                       <Download className="mr-2 h-4 w-4" />
+                                       下載收據
+                                    </>
+                                  )}
+                               </Button>
+                            )}
+                         </PDFDownloadLink>
+                      </div>
                   ) : (
                      <Button variant="ghost" disabled className="text-stone-400">
                         收據製作中

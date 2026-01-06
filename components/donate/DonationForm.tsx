@@ -110,9 +110,9 @@ export function DonationForm() {
 
       const result = await submitDonation(null, formData);
 
-      if (result.error) {
+      if (!result.success) {
         toast.error("提交失敗", {
-          description: result.error,
+          description: result.error || "請稍後再試",
         });
       } else {
         setIsSuccess(true);
@@ -348,7 +348,7 @@ export function DonationForm() {
                 </div>
               </div>
 
-              {/* <div className="border-t pt-4 mt-4 bg-stone-50 p-4 rounded-lg">
+              <div className="border-t pt-4 mt-4 bg-stone-50 p-4 rounded-lg">
                 <FormField
                   control={form.control}
                   name="need_receipt"
@@ -402,7 +402,7 @@ export function DonationForm() {
                     />
                   </div>
                 )}
-              </div> */}
+              </div>
 
               <FormField
                   control={form.control}

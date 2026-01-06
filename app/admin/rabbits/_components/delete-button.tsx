@@ -13,8 +13,8 @@ export function DeleteRabbitButton({ id }: { id: string }) {
     if (confirm("確定要刪除這筆資料嗎？此動作無法復原。")) {
       startTransition(async () => {
         const res = await deleteRabbit(id);
-        if (res?.error) {
-          toast.error(res.error);
+        if (!res.success) {
+          toast.error(res.error || "刪除失敗");
         } else {
           toast.success("已刪除");
         }

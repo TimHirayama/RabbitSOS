@@ -2,6 +2,8 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
+import { ApiResponse } from "@/types/api";
+import { successResponse, errorResponse } from "@/lib/api-response";
 
 const searchSchema = z.object({
   donor_name: z.string().min(1, "請輸入捐款人姓名"),
@@ -18,16 +20,10 @@ export type SearchResult = {
   created_at: string;
 };
 
-export type SearchState = {
-  error?: string | null;
-  success?: boolean;
-  data?: SearchResult[];
-};
-
 export async function searchDonation(
-  prevState: SearchState,
+  prevState: ApiResponse<SearchResult[]>,
   formData: FormData
-): Promise<SearchState> {
+): Promise<ApiResponse<SearchResult[]>> {
   try {
     const supabase = await createClient();
     
@@ -41,7 +37,7 @@ export async function searchDonation(
     const validated = searchSchema.safeParse(rawData);
 
     if (!validated.success) {
-      return { error: validated.error.issues[0].message };
+      return errorResponse(validated.error.issues[0].message);
     }
 
     const { donor_name, verify_type, verify_value } = validated.data;
@@ -63,16 +59,16 @@ export async function searchDonation(
 
     if (error) {
       console.error("Search Error:", error);
-      return { error: "查詢發生錯誤，請稍後再試" };
+      return errorResponse("查詢發生錯誤，請稍後再試");
     }
 
     if (!data || data.length === 0) {
-      return { error: "查無符合資料，請確認輸入資訊是否正確" };
+      return errorResponse("查無符合資料，請確認輸入資訊是否正確");
     }
 
-    return { success: true, data: data as SearchResult[], error: null };
+    return successResponse(data as SearchResult[]);
   } catch (e) {
     console.error("System Error:", e);
-    return { error: "系統發生錯誤，請稍後再試" };
+    return errorResponse("系統發生錯誤，請稍後再試");
   }
 }
