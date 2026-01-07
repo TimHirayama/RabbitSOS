@@ -23,9 +23,9 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value, options }) => {
             request.cookies.set(name, value)
-          )
+          })
           
           response = NextResponse.next({
             request: {
@@ -33,9 +33,11 @@ export async function updateSession(request: NextRequest) {
             },
           })
           
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          )
+          cookiesToSet.forEach(({ name, value, options }) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { maxAge, ...cookieOptions } = options
+            response.cookies.set(name, value, cookieOptions)
+          })
         },
       },
     }
