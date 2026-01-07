@@ -93,21 +93,21 @@ export async function NewsSection() {
                  ></iframe>
             </div>
             <div className="flex gap-4">
-                <Card className="flex-1 bg-blue-50 border-blue-100 hover:shadow-md transition-shadow cursor-pointer">
+                <Card className="flex-1 bg-amber-50 border-amber-100 hover:shadow-md transition-shadow cursor-pointer">
                     <CardContent className="p-4 flex items-center gap-3">
-                        <PlayCircle className="w-8 h-8 text-blue-500" />
+                        <PlayCircle className="w-8 h-8 text-amber-500" />
                         <div>
-                            <p className="font-bold text-blue-900 text-sm">新手飼主必看</p>
-                            <p className="text-xs text-blue-700">正確抱兔兔教學</p>
+                            <p className="font-bold text-amber-900 text-sm">救援紀錄</p>
+                            <p className="text-xs text-amber-700">重傷免免救援實錄</p>
                         </div>
                     </CardContent>
                 </Card>
-                 <Card className="flex-1 bg-green-50 border-green-100 hover:shadow-md transition-shadow cursor-pointer">
+                 <Card className="flex-1 bg-rose-50 border-rose-100 hover:shadow-md transition-shadow cursor-pointer">
                     <CardContent className="p-4 flex items-center gap-3">
-                        <PlayCircle className="w-8 h-8 text-green-500" />
+                        <PlayCircle className="w-8 h-8 text-rose-500" />
                         <div>
-                            <p className="font-bold text-green-900 text-sm">環境佈置</p>
-                            <p className="text-xs text-green-700">給兔兔一個舒適的家</p>
+                            <p className="font-bold text-rose-900 text-sm">送養特輯</p>
+                            <p className="text-xs text-rose-700">快樂回家的免免們</p>
                         </div>
                     </CardContent>
                 </Card>

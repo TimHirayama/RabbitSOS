@@ -12,7 +12,6 @@ import Image from "next/image";
 const navItems = [
   { label: "找兔兔", href: "/rabbits" },
   { label: "愛心捐款", href: "/donate" },
-  { label: "新手專區", href: "/posts?category=knowledge" },
   { label: "最新消息", href: "/posts?category=news" },
 ];
 
