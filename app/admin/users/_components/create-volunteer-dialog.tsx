@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -6,26 +6,27 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { createVolunteer } from "@/app/actions/auth";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { UserForm } from "./user-form";
 
-export function CreateVolunteerDialog() {
+interface CreateVolunteerDialogProps {
+  currentUserRole?: string;
+}
+
+export function CreateVolunteerDialog({
+  currentUserRole,
+}: CreateVolunteerDialogProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (formData: FormData) => {
     setLoading(true);
-    const formData = new FormData(e.currentTarget);
-    
+
     try {
       const res = await createVolunteer(formData);
       if (res.error) {
@@ -44,65 +45,22 @@ export function CreateVolunteerDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>新增志工</Button>
+        <Button>新增人員</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[600px] overflow-y-auto max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle>新增志工帳號</DialogTitle>
+          <DialogTitle>新增人員帳號</DialogTitle>
           <DialogDescription>
-            請輸入志工的 Email 與姓名。預設密碼將設為 email 前綴 (或自行設定)。
-            此帳號將擁有後台管理權限 (無法管理人員)。
+            建立新的管理員或志工帳號。請填寫詳細資料。
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="fullName" className="text-right">
-                姓名
-              </Label>
-              <Input
-                id="fullName"
-                name="fullName"
-                placeholder="王小明"
-                className="col-span-3"
-                required
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right">
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="volunteer@example.com"
-                className="col-span-3"
-                required
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="password" className="text-right">
-                密碼
-              </Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="至少 6 碼"
-                className="col-span-3"
-                required
-                minLength={6}
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button type="submit" disabled={loading}>
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              建立帳號
-            </Button>
-          </DialogFooter>
-        </form>
+
+        <UserForm
+          onSubmit={handleSubmit}
+          loading={loading}
+          isEdit={false}
+          currentUserRole={currentUserRole}
+        />
       </DialogContent>
     </Dialog>
   );

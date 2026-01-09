@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Rabbit } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 
 export async function FeaturedRabbits() {
@@ -50,8 +51,8 @@ export async function FeaturedRabbits() {
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
-                  <div className="flex items-center justify-center h-full text-stone-300 bg-stone-100">
-                    <span className="text-4xl">🐰</span>
+                  <div className="flex items-center justify-center h-full text-orange-200 bg-orange-50">
+                    <Rabbit className="w-16 h-16" />
                   </div>
                 )}
                 

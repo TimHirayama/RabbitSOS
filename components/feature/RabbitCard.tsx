@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, MapPin, Mars, Venus } from "lucide-react";
+import { Calendar, MapPin, Mars, Venus, Rabbit } from "lucide-react";
 import type { Database } from "@/types/supabase";
 
 type Rabbit = Database["public"]["Tables"]["rabbits"]["Row"];
@@ -12,18 +12,23 @@ interface RabbitCardProps {
 }
 
 export function RabbitCard({ rabbit }: RabbitCardProps) {
-  const coverImage = rabbit.image_urls?.[0] || "https://images.unsplash.com/photo-1585110396067-c1d6389710cc?q=80&w=600&auto=format&fit=crop"; 
-  // Placeholder fallback
-
+  // const coverImage = rabbit.image_urls?.[0]; // Removed unused variable if not needed, or keep for logic
+  
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow border-none shadow-sm group">
       <div className="aspect-square bg-stone-200 relative overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={coverImage}
-          alt={rabbit.name}
-          className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
-        />
+        {rabbit.image_urls?.[0] ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={rabbit.image_urls[0]}
+            alt={rabbit.name}
+            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-orange-50 text-orange-200">
+             <Rabbit className="w-20 h-20" />
+          </div>
+        )}
         <div className="absolute top-2 right-2">
           {rabbit.status === "open" && <Badge className="bg-green-500 hover:bg-green-600">開放認養</Badge>}
           {rabbit.status === "reserved" && <Badge className="bg-amber-500 hover:bg-amber-600">已預訂</Badge>}

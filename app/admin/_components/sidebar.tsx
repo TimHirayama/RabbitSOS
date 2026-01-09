@@ -1,11 +1,8 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Rabbit,
-  LogOut,
-} from "lucide-react";
+import { Rabbit, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
@@ -14,13 +11,14 @@ import { adminNavItems } from "../_config/nav";
 
 interface SidebarProps {
   profile: {
-    role: 'admin' | 'volunteer' | 'user';
+    role: string;
     full_name?: string | null;
     email?: string | null;
   };
+  featureFlags: Record<string, boolean>;
 }
 
-export function AdminSidebar({ profile }: SidebarProps) {
+export function AdminSidebar({ profile, featureFlags }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -42,7 +40,16 @@ export function AdminSidebar({ profile }: SidebarProps) {
       <nav className="flex flex-col gap-2 p-4 flex-1">
         {adminNavItems.map((item) => {
           if (!item.roles.includes(profile.role)) return null;
-          
+
+          // Feature Flag check: Skip if flag is disabled AND user is NOT super_admin
+          if (
+            item.featureFlag &&
+            !featureFlags?.[item.featureFlag] &&
+            profile.role !== "super_admin"
+          ) {
+            return null;
+          }
+
           const isActive = pathname === item.href;
           return (
             <Link
@@ -59,22 +66,30 @@ export function AdminSidebar({ profile }: SidebarProps) {
           );
         })}
       </nav>
-      
-      <div className="mt-auto border-t p-4 space-y-4">
-         <div className="hidden lg:flex items-center gap-3 px-2">
-            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-              {profile.full_name?.[0] || profile.email?.[0]?.toUpperCase() || 'U'}
-            </div>
-            <div className="flex flex-col overflow-hidden">
-               <span className="text-sm font-medium truncate">{profile.full_name || "使用者"}</span>
-               <span className="text-xs text-muted-foreground truncate capitalize">{profile.role}</span>
-            </div>
-         </div>
 
-         <Button variant="ghost" className="w-full justify-start gap-3 px-3 text-muted-foreground hover:text-red-500" onClick={handleSignOut}>
-            <LogOut className="h-5 w-5" />
-            <span className="hidden lg:inline">登出</span>
-         </Button>
+      <div className="mt-auto border-t p-4 space-y-4">
+        <div className="hidden lg:flex items-center gap-3 px-2">
+          <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+            {profile.full_name?.[0] || profile.email?.[0]?.toUpperCase() || "U"}
+          </div>
+          <div className="flex flex-col overflow-hidden">
+            <span className="text-sm font-medium truncate">
+              {profile.full_name || "使用者"}
+            </span>
+            <span className="text-xs text-muted-foreground truncate capitalize">
+              {profile.role}
+            </span>
+          </div>
+        </div>
+
+        <Button
+          variant="ghost"
+          className="w-full justify-start gap-3 px-3 text-muted-foreground hover:text-red-500"
+          onClick={handleSignOut}
+        >
+          <LogOut className="h-5 w-5" />
+          <span className="hidden lg:inline">登出</span>
+        </Button>
       </div>
     </aside>
   );
