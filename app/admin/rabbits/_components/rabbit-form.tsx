@@ -257,6 +257,27 @@ export function RabbitForm({
               </div>
 
               <div className="grid gap-2">
+                <Label htmlFor="color">花色</Label>
+                <Select
+                  name="color"
+                  defaultValue={initialData?.color || "unknown"}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="選擇花色" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="White">⚪️ 白色 (White)</SelectItem>
+                    <SelectItem value="Brown">🟤 棕色 (Brown)</SelectItem>
+                    <SelectItem value="Grey">⚫️ 灰色 (Grey)</SelectItem>
+                    <SelectItem value="Black">⬛️ 黑色 (Black)</SelectItem>
+                    <SelectItem value="Bicolor">🏁 雙色 (Bicolor)</SelectItem>
+                    <SelectItem value="Tricolor">🎨 三色 (Tricolor)</SelectItem>
+                    <SelectItem value="Other">❓ 其他 (Other)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="grid gap-2">
                 <Label htmlFor="age_category">年齡層</Label>
                 <Select
                   name="age_category"
@@ -349,6 +370,20 @@ export function RabbitForm({
                   defaultValue={initialData?.introducer_name}
                 />
               </div>
+
+              {/* Discovery Location */}
+              <div className="grid gap-2">
+                <Label htmlFor="discovery_location">
+                  發現地點 (Discovery Location)
+                </Label>
+                <Input
+                  id="discovery_location"
+                  name="discovery_location"
+                  defaultValue={initialData?.discovery_location}
+                  placeholder="ex: 新北市三重區公園"
+                />
+              </div>
+
               <div className="grid gap-2">
                 <Label htmlFor="introducer_org">單位 (若有)</Label>
                 <Input

@@ -30,7 +30,7 @@ const navStructure = [
     ],
   },
   { label: "待認養兔寶", href: "/rabbits" },
-  { label: "愛心義賣", href: "/shop" },
+  { label: "愛心義賣", href: "https://www.rabbitsos.com/", external: true },
   { label: "救援申請", href: "/rescue" },
   { label: "志工招募", href: "/volunteer" },
   {
@@ -271,6 +271,8 @@ export function Navbar() {
                     <NavigationMenuLink asChild>
                       <Link
                         href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
                         className={cn(
                           navigationMenuTriggerStyle(),
                           "bg-transparent text-base font-medium text-stone-600 hover:text-orange-600 hover:bg-orange-50 focus:text-orange-600"
@@ -358,6 +360,8 @@ export function Navbar() {
                       <Link
                         key={item.href}
                         href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
                         className={cn(
                           "flex w-full items-center py-3 px-4 text-lg font-medium transition-colors rounded-lg",
                           item.highlight

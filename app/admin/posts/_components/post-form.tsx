@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import {
   Select,
@@ -14,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ImageUpload } from "../../_components/image-upload";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { createPost, updatePost } from "../actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -26,8 +26,11 @@ interface PostFormProps {
 export function PostForm({ initialData }: PostFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [coverImages, setCoverImages] = useState<string[]>(initialData?.cover_image ? [initialData.cover_image] : []);
+  const [coverImages, setCoverImages] = useState<string[]>(
+    initialData?.cover_image ? [initialData.cover_image] : []
+  );
   const [published, setPublished] = useState(initialData?.published || false);
+  const [content, setContent] = useState(initialData?.content || "");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,20 +38,25 @@ export function PostForm({ initialData }: PostFormProps) {
 
     const formData = new FormData(e.currentTarget);
     if (coverImages.length > 0) {
-      formData.set('cover_image', coverImages[0]);
+      formData.set("cover_image", coverImages[0]);
     }
-    formData.set('published', published.toString());
+    formData.set("published", published.toString());
 
     try {
+      let res;
       if (initialData) {
-        const res = await updatePost(initialData.id, formData);
-        if (res?.error) throw new Error(res.error);
-        toast.success("更新成功");
+        res = await updatePost(initialData.id, formData);
       } else {
-        const res = await createPost(formData);
-        if (res?.error) throw new Error(res.error);
-        toast.success("新增成功");
+        res = await createPost(formData);
       }
+
+      if (!res.success) {
+        throw new Error(res.error || "操作失敗");
+      }
+
+      toast.success(initialData ? "更新成功" : "新增成功");
+      router.push("/admin/posts");
+      router.refresh();
     } catch (error: any) {
       toast.error("儲存失敗: " + error.message);
     } finally {
@@ -61,8 +69,8 @@ export function PostForm({ initialData }: PostFormProps) {
       <div className="space-y-4">
         <div className="grid gap-2">
           <Label>封面圖片</Label>
-          <ImageUpload 
-            value={coverImages} 
+          <ImageUpload
+            value={coverImages}
             onChange={(urls) => setCoverImages(urls.slice(-1))} // Keep only last one
             disabled={loading}
           />
@@ -71,13 +79,21 @@ export function PostForm({ initialData }: PostFormProps) {
 
         <div className="grid gap-2">
           <Label htmlFor="title">標題</Label>
-          <Input id="title" name="title" defaultValue={initialData?.title} required />
+          <Input
+            id="title"
+            name="title"
+            defaultValue={initialData?.title}
+            required
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="category">分類</Label>
-            <Select name="category" defaultValue={initialData?.category || "news"}>
+            <Select
+              name="category"
+              defaultValue={initialData?.category || "news"}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="選擇分類" />
               </SelectTrigger>
@@ -90,9 +106,9 @@ export function PostForm({ initialData }: PostFormProps) {
           </div>
           <div className="grid gap-2 items-end pb-2">
             <div className="flex items-center space-x-2">
-              <Switch 
-                id="published" 
-                checked={published} 
+              <Switch
+                id="published"
+                checked={published}
                 onCheckedChange={setPublished}
               />
               <Label htmlFor="published">立即發布</Label>
@@ -102,13 +118,13 @@ export function PostForm({ initialData }: PostFormProps) {
 
         <div className="grid gap-2">
           <Label htmlFor="content">內容</Label>
-          <Textarea 
-            id="content" 
-            name="content" 
-            defaultValue={initialData?.content} 
-            className="min-h-[300px]"
-            placeholder="支援 Markdown..."
+          <RichTextEditor
+            value={content}
+            onChange={setContent}
+            disabled={loading}
           />
+          {/* Hidden input for FormData to pick up automatically */}
+          <input type="hidden" name="content" value={content} />
         </div>
       </div>
 
@@ -117,9 +133,9 @@ export function PostForm({ initialData }: PostFormProps) {
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           {initialData ? "儲存公告" : "發布公告"}
         </Button>
-        <Button 
-          variant="outline" 
-          type="button" 
+        <Button
+          variant="outline"
+          type="button"
           onClick={() => router.back()}
           disabled={loading}
         >

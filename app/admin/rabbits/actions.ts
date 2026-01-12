@@ -35,6 +35,8 @@ export async function createRabbit(
   const introducer_org = formData.get("introducer_org") as string;
   const rescue_date = (formData.get("rescue_date") as string) || null;
   const intake_date = (formData.get("intake_date") as string) || null;
+  const color = formData.get("color") as string;
+  const discovery_location = formData.get("discovery_location") as string;
 
   const { data, error } = await supabase
     .from("rabbits")
@@ -56,6 +58,8 @@ export async function createRabbit(
       introducer_org,
       rescue_date,
       intake_date,
+      color,
+      discovery_location,
     })
     .select()
     .single();
@@ -99,6 +103,8 @@ export async function updateRabbit(
   const introducer_org = formData.get("introducer_org") as string;
   const rescue_date = (formData.get("rescue_date") as string) || null;
   const intake_date = (formData.get("intake_date") as string) || null;
+  const color = formData.get("color") as string;
+  const discovery_location = formData.get("discovery_location") as string;
 
   const { error } = await supabase
     .from("rabbits")
