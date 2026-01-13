@@ -6,8 +6,6 @@ import { redirect } from "next/navigation";
 
 import { rescueApplicationSchema, type RescueApplicationData } from "./schema";
 
-export { rescueApplicationSchema, type RescueApplicationData };
-
 export async function submitRescueApplication(data: RescueApplicationData) {
   const supabase = await createClient();
 

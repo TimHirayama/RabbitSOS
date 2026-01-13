@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Settings,
   ToggleLeft,
+  FileText,
 } from "lucide-react";
 
 export type NavItem = {
@@ -70,6 +71,12 @@ export const adminNavItems: NavItem[] = [
     href: "/admin/logs",
     icon: ScrollText,
     roles: ["super_admin"],
+  },
+  {
+    title: "檔案管理",
+    href: "/admin/files",
+    icon: FileText,
+    roles: ["super_admin", "admin"],
   },
   {
     title: "首頁橫幅",

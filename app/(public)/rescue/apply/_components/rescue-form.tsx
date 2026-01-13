@@ -40,9 +40,9 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const STEPS = [
-  { id: 1, title: "照片證據 (Evidence)" },
-  { id: 2, title: "救援資訊 (Rescue Info)" },
-  { id: 3, title: "通報人資料 (Reporter)" },
+  { id: 1, title: "照片證據", subtitle: "Evidence" },
+  { id: 2, title: "救援資訊", subtitle: "Rescue Info" },
+  { id: 3, title: "通報人資料", subtitle: "Reporter" },
 ];
 
 export function RescueForm() {
@@ -168,10 +168,10 @@ export function RescueForm() {
   return (
     <div className="max-w-3xl mx-auto py-8 px-4">
       {/* Progress Steps */}
-      <div className="flex items-center justify-between mb-8 relative">
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-gray-200 -z-10 rounded-full"></div>
+      <div className="flex items-start justify-between mb-8 relative">
+        <div className="absolute left-0 top-5 -translate-y-1/2 w-full h-1 bg-stone-200 -z-10 rounded-full"></div>
         <div
-          className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-orange-500 -z-10 rounded-full transition-all duration-300"
+          className="absolute left-0 top-5 -translate-y-1/2 h-1 bg-orange-500 -z-10 rounded-full transition-all duration-300"
           style={{
             width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%`,
           }}
@@ -180,26 +180,34 @@ export function RescueForm() {
         {STEPS.map((step) => (
           <div
             key={step.id}
-            className="flex flex-col items-center bg-stone-50 px-2"
+            className="flex flex-col items-center relative z-10 group cursor-default"
           >
             <div
               className={cn(
-                "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-colors",
+                "w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all duration-300 bg-white shadow-sm ring-4 ring-white",
                 currentStep >= step.id
-                  ? "bg-orange-500 text-white border-orange-500"
-                  : "bg-white text-gray-400 border-gray-300"
+                  ? "border-orange-500 text-orange-500"
+                  : "border-stone-200 text-stone-300",
+                currentStep > step.id &&
+                  "bg-orange-500 text-white border-orange-500"
               )}
             >
-              {currentStep > step.id ? <Check className="w-6 h-6" /> : step.id}
+              {currentStep > step.id ? <Check className="w-5 h-5" /> : step.id}
             </div>
-            <span
-              className={cn(
-                "text-xs font-bold mt-2",
-                currentStep >= step.id ? "text-orange-600" : "text-gray-400"
-              )}
-            >
-              {step.title}
-            </span>
+
+            <div className="flex flex-col items-center mt-3">
+              <span
+                className={cn(
+                  "text-sm font-bold tracking-wide transition-colors duration-300",
+                  currentStep >= step.id ? "text-stone-800" : "text-stone-400"
+                )}
+              >
+                {step.title}
+              </span>
+              <span className="text-[10px] font-medium text-stone-400 uppercase tracking-widest mt-1">
+                {step.subtitle}
+              </span>
+            </div>
           </div>
         ))}
       </div>
@@ -584,25 +592,27 @@ export function RescueForm() {
               )}
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between pt-6 border-t border-stone-100 mt-6">
+              {/* Navigation Buttons */}
+              <div className="flex flex-col-reverse md:flex-row md:justify-between pt-6 border-t border-stone-100 mt-6 gap-4">
                 {currentStep > 1 ? (
                   <Button
                     type="button"
                     variant="outline"
                     onClick={prevStep}
                     disabled={isSubmitting}
+                    className="w-full md:w-auto"
                   >
                     上一步
                   </Button>
                 ) : (
-                  <div></div>
+                  <div className="hidden md:block"></div>
                 )}
 
                 {currentStep < 3 ? (
                   <Button
                     type="button"
                     onClick={nextStep}
-                    className="bg-orange-500 hover:bg-orange-600"
+                    className="bg-orange-500 hover:bg-orange-600 w-full md:w-auto ml-auto"
                   >
                     下一步
                   </Button>
