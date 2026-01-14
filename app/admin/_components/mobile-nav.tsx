@@ -34,7 +34,12 @@ export function AdminMobileNav({ profile, featureFlags }: MobileNavProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button size="icon" variant="outline" className="lg:hidden">
+        <Button
+          size="icon"
+          variant="outline"
+          className="lg:hidden"
+          suppressHydrationWarning
+        >
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle Menu</span>
         </Button>

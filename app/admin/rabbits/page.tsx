@@ -96,7 +96,7 @@ export default async function AdminRabbitsPage(props: {
       <AdminSearchFilters placeholder="搜尋兔子名稱、地點或狀態..." />
 
       {/* Desktop View */}
-      <div className="rounded-md border hidden md:block">
+      <div className="rounded-md border bg-white hidden md:block">
         <Table>
           <TableHeader>
             <TableRow>

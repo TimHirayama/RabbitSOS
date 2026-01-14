@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { format } from "date-fns";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, PlayCircle } from "lucide-react";
@@ -11,10 +12,6 @@ export async function NewsSection() {
   const supabase = await createClient();
 
   // Parallel Fetching for Categories
-  // Note: Assuming 'news' category is used for general/pinned updates if 'is_pinned' column doesn't exist yet.
-  // We'll treat the 'Pinned' tab as 'Latest News' or check for 'is_pinned' if schema allows.
-  // For safety, we'll fetch 'news' category for 'Pinned' and specific categories for others.
-
   const fetchCategory = async (category: string) => {
     return supabase
       .from("posts")
@@ -25,25 +22,25 @@ export async function NewsSection() {
       .limit(5);
   };
 
-  const [pinnedParams, rescueParams, fundraisingParams, eventParams] =
+  const [topParams, foundParams, fundraisingParams, eventParams] =
     await Promise.all([
-      fetchCategory("news"), // Mapping 'news' to 'Pinned' tab for now
-      fetchCategory("rescue"),
+      fetchCategory("top"),
+      fetchCategory("found"),
       fetchCategory("fundraising"),
       fetchCategory("event"),
     ]);
 
   const categories = [
     {
-      id: "pinned",
+      id: "top",
       label: "置頂公告",
-      data: pinnedParams.data,
+      data: topParams.data,
       color: "text-red-500",
     },
     {
-      id: "rescue",
+      id: "found",
       label: "拾獲棄兔",
-      data: rescueParams.data,
+      data: foundParams.data,
       color: "text-amber-500",
     },
     {
@@ -87,7 +84,7 @@ export async function NewsSection() {
             </div>
 
             <div className="bg-white rounded-2xl shadow-sm border border-stone-100 overflow-hidden">
-              <Tabs defaultValue="pinned" className="w-full">
+              <Tabs defaultValue="top" className="w-full">
                 <TabsList className="w-full justify-start h-auto p-0 bg-stone-50 border-b border-stone-100 rounded-none">
                   {categories.map((cat) => (
                     <TabsTrigger
@@ -134,9 +131,10 @@ export async function NewsSection() {
                                     </span>
                                   </div>
                                   <span className="text-sm text-stone-400 whitespace-nowrap font-mono shrink-0">
-                                    {new Date(
-                                      item.published_at!
-                                    ).toLocaleDateString("zh-TW")}
+                                    {format(
+                                      new Date(item.published_at),
+                                      "yyyy/MM/dd"
+                                    )}
                                   </span>
                                 </div>
                               </Link>

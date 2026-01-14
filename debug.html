@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-TJ6DNX8');</script>
+	<!-- End Google Tag Manager -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  	<title>台灣流浪兔保護協會</title>
+  	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+ 	<script src="js/main.js"></script>
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+  	crossorigin="anonymous">
+  	<link rel="stylesheet" href="css/style.css">
+  	<link rel="stylesheet" href="css/custom2.css">
+  	<link rel="stylesheet" href="css/font-icon.css">
+</head>
+<script>
+	$( document ).ready(function() {
+        //Header
+        $( "#aboutus" ).on("click", function() {
+		  	$( ".aboutMenu" ).slideToggle( "fast" );
+		});
+	});
+</script>
+<body>
+	<!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJ6DNX8"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+	
+	<!-- import header -->	
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	  	js = d.createElement(s); js.id = id;
+	  	js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v3.2&appId=2231151103879522';
+	  	fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+
+<header class="header">
+		<!--logo-->
+		<a href="index.php">
+			<h1 class="header-logo">
+				<img class="img-logo" src="img/logo.svg"></a>
+			</h1>
+		</a>
+		<!--logo END-->	
+
+		<ul class="nav my-2">
+			<li class="nav-item">
+		  		<a id="home" class="nav-link h3" href="index.php">首頁</a>
+			</li>
+			<li class="nav-item">
+		  		<a id="rabbitlist" class="nav-link h3" href="rabbitlist.php">待認養兔寶</a>
+			</li>
+			<li class="nav-item">
+		  		<a class="nav-link h3" href="https://rabbitsos.com">愛心義賣</a>
+			</li>
+			<li class="nav-item">
+		  		<a id="rescue" class="nav-link h3" href="rescue.php">救援申請</a>
+			</li>
+			<li class="nav-item">
+		  		<a id="midway" class="nav-link h3" href="midway.php">中途/志工招募</a>
+			</li>
+			<li class="nav-item">
+		        <a id="aboutus" class="nav-link dropdown-toggle h3">關於我們</a>
+	      	</li>
+<!-- 			<li class="nav-item">
+		  		<a id="msgBoard" class="nav-link h3" data-toggle="modal" href="#msgPopup">留言板</a>
+			</li> -->
+	  	</ul>
+
+	  	<ul class="nav nav-Manage my-2">
+	  		<li class="nav-item">
+		  		<a id="midway" class="nav-link h3" data-toggle="modal" href="#login">管理</a>
+			</li>
+	  	</ul>
+  	</div>
+</header>
+
+<!-- Modal Box(PopupMsgBoard) -->
+<div class="modal fade" id="msgPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLongTitle">留言板</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	     	<div class="fb-comments" data-href="http://122.116.165.157/rabbit_newpage/index.php" data-numposts="10" width="100%" order_by="reverse_time"></div>
+	      </div>
+	    </div>
+	</div>
+</div>
+
+<!-- Modal Box(PopupMsgBoard) -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      	<div class="modal-header">管理系統</div>
+	      	<div class="modal-body">
+		      	<form action="management_announcement.php" method="POST">
+		      		<div class="mt-2">
+		      			<input type="text" class="form-control" name="InputID" placeholder="帳號">
+		      		</div>
+			     	<div class="my-4">
+						<input type="password" class="form-control" name="InputPW" placeholder="密碼">
+					</div>
+					<button type="submit" class="btn btn-primary btn-block">登入</button>
+				</form>
+	      	</div>
+	    </div>
+	</div>
+</div>
+	<!--Main Visual-->
+	<div class="visual-background mb-4">  
+		<h5 class="visual_title">公告清單</h5>
+	</div>
+	<!--Main Visual END-->
+
+	<!--About Menu-->
+	<div class="aboutMenu">
+		<div class="flexMenu">
+			<div>
+				<a class="menuItem" href="aboutus.php">關於我們</a>
+			</div>
+			<div>
+				<a class="menuItem" href="successcases.php">成功送養紀錄</a>
+			</div>
+			<div>
+				<a class="menuItem" href="rescue_report.php">救援紀錄</a>
+			</div>
+			<div>
+				<a class="menuItem" href="heaven.php">紀念天堂</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container lh-24">
+		<ul>
+							<div>
+					<a href=announcement_details.php?id=5>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">置頂</span>
+							<span><div class="s-divide"></div></span>
+							物資需求表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=242>
+						<li class="announceWording">
+							<span class="text-secondary">2025-09-02<div class="s-divide"></div></span>
+							<span class="text-danger">置頂</span>
+							<span><div class="s-divide"></div></span>
+							2026年1月份活動						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=250>
+						<li class="announceWording">
+							<span class="text-secondary">2025-12-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=249>
+						<li class="announceWording">
+							<span class="text-secondary">2025-12-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年11月份 						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=248>
+						<li class="announceWording">
+							<span class="text-secondary">2025-11-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年10月份 						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=247>
+						<li class="announceWording">
+							<span class="text-secondary">2025-11-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=246>
+						<li class="announceWording">
+							<span class="text-secondary">2025-10-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=245>
+						<li class="announceWording">
+							<span class="text-secondary">2025-10-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=244>
+						<li class="announceWording">
+							<span class="text-secondary">2025-09-22<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=243>
+						<li class="announceWording">
+							<span class="text-secondary">2025-09-22<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=240>
+						<li class="announceWording">
+							<span class="text-secondary">2025-08-25<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=239>
+						<li class="announceWording">
+							<span class="text-secondary">2025-08-25<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=238>
+						<li class="announceWording">
+							<span class="text-secondary">2025-08-25<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=237>
+						<li class="announceWording">
+							<span class="text-secondary">2025-08-25<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=236>
+						<li class="announceWording">
+							<span class="text-secondary">2025-08-25<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=235>
+						<li class="announceWording">
+							<span class="text-secondary">2025-08-25<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=212>
+						<li class="announceWording">
+							<span class="text-secondary">2025-05-22<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動募得款使用情形成果報告書						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=211>
+						<li class="announceWording">
+							<span class="text-secondary">2025-05-22<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動支出明細表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=210>
+						<li class="announceWording">
+							<span class="text-secondary">2025-05-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=209>
+						<li class="announceWording">
+							<span class="text-secondary">2025-05-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=208>
+						<li class="announceWording">
+							<span class="text-secondary">2025-05-07<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人捐贈資料						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=207>
+						<li class="announceWording">
+							<span class="text-secondary">2025-04-16<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=206>
+						<li class="announceWording">
+							<span class="text-secondary">2025-04-16<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=205>
+						<li class="announceWording">
+							<span class="text-secondary">2025-04-08<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2025年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=203>
+						<li class="announceWording">
+							<span class="text-secondary">2025-04-08<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2025年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=202>
+						<li class="announceWording">
+							<span class="text-secondary">2025-02-12<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年12月27日至2025年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=200>
+						<li class="announceWording">
+							<span class="text-secondary">2025-02-12<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024-2025流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年12月27日至2025年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=199>
+						<li class="announceWording">
+							<span class="text-secondary">2025-02-12<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2025年1月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=198>
+						<li class="announceWording">
+							<span class="text-secondary">2025-01-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2024年協會收支一覽表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=195>
+						<li class="announceWording">
+							<span class="text-secondary">2025-01-09<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年12月1日至12月26日 						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=194>
+						<li class="announceWording">
+							<span class="text-secondary">2025-01-09<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年12月1日12月26日 						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=193>
+						<li class="announceWording">
+							<span class="text-secondary">2025-01-03<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料暨收支一覽表公開徵信資料						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=192>
+						<li class="announceWording">
+							<span class="text-secondary">2024-12-30<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年11月份 						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=191>
+						<li class="announceWording">
+							<span class="text-secondary">2024-12-30<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年11月份 						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=190>
+						<li class="announceWording">
+							<span class="text-secondary">2024-11-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=189>
+						<li class="announceWording">
+							<span class="text-secondary">2024-11-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=188>
+						<li class="announceWording">
+							<span class="text-secondary">2024-11-14<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動募得款使用情形成果報告書						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=187>
+						<li class="announceWording">
+							<span class="text-secondary">2024-11-14<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動收支明細表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=186>
+						<li class="announceWording">
+							<span class="text-secondary">2024-10-20<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							台北市士林百齡河岸風箏公園拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=185>
+						<li class="announceWording">
+							<span class="text-secondary">2024-10-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=184>
+						<li class="announceWording">
+							<span class="text-secondary">2024-10-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=183>
+						<li class="announceWording">
+							<span class="text-secondary">2024-10-08<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							台中台中美光科技公司附近拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=182>
+						<li class="announceWording">
+							<span class="text-secondary">2024-09-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=181>
+						<li class="announceWording">
+							<span class="text-secondary">2024-09-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=180>
+						<li class="announceWording">
+							<span class="text-secondary">2024-08-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=179>
+						<li class="announceWording">
+							<span class="text-secondary">2024-08-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=178>
+						<li class="announceWording">
+							<span class="text-secondary">2024-07-12<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=177>
+						<li class="announceWording">
+							<span class="text-secondary">2024-07-12<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=176>
+						<li class="announceWording">
+							<span class="text-secondary">2024-07-09<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							安置中心門口拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=175>
+						<li class="announceWording">
+							<span class="text-secondary">2024-06-28<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							台中潭子車站拾獲十四兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=174>
+						<li class="announceWording">
+							<span class="text-secondary">2024-06-24<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							桃園市大園區比力倉儲公司外拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=173>
+						<li class="announceWording">
+							<span class="text-secondary">2024-06-22<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							宜蘭縣蘇澳鎮龍德里中興一巷拾獲四兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=172>
+						<li class="announceWording">
+							<span class="text-secondary">2024-06-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=171>
+						<li class="announceWording">
+							<span class="text-secondary">2024-06-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=170>
+						<li class="announceWording">
+							<span class="text-secondary">2024-06-02<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							桃園市桃園區中山公園拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=169>
+						<li class="announceWording">
+							<span class="text-secondary">2024-05-27<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							桃園市錐光金屬公司後面停車場拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=168>
+						<li class="announceWording">
+							<span class="text-secondary">2024-05-13<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=167>
+						<li class="announceWording">
+							<span class="text-secondary">2024-05-13<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=166>
+						<li class="announceWording">
+							<span class="text-secondary">2024-05-10<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							台中清水區高美濕地拾獲三兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=165>
+						<li class="announceWording">
+							<span class="text-secondary">2024-05-06<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2024年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=163>
+						<li class="announceWording">
+							<span class="text-secondary">2024-04-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=162>
+						<li class="announceWording">
+							<span class="text-secondary">2024-04-15<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=161>
+						<li class="announceWording">
+							<span class="text-secondary">2024-03-21<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2024年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=160>
+						<li class="announceWording">
+							<span class="text-secondary">2024-03-21<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2024年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=158>
+						<li class="announceWording">
+							<span class="text-secondary">2024-02-24<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023年協會收支一覽表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=157>
+						<li class="announceWording">
+							<span class="text-secondary">2024-02-24<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2023年12月27日至2024年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=156>
+						<li class="announceWording">
+							<span class="text-secondary">2024-02-24<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年12月27日至2024年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=155>
+						<li class="announceWording">
+							<span class="text-secondary">2024-02-24<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2023-2024流浪兔、受虐兔救助工作公益勸募活動收支一覽表-2023年12月27日至2024年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=154>
+						<li class="announceWording">
+							<span class="text-secondary">2024-01-11<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							新竹華德福實驗學校附近河堤拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=153>
+						<li class="announceWording">
+							<span class="text-secondary">2024-01-03<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=152>
+						<li class="announceWording">
+							<span class="text-secondary">2023-12-31<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=151>
+						<li class="announceWording">
+							<span class="text-secondary">2023-12-22<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							萬巒鄉草叢裡拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=150>
+						<li class="announceWording">
+							<span class="text-secondary">2023-12-19<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							安置中心門口拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=149>
+						<li class="announceWording">
+							<span class="text-secondary">2023-12-13<div class="s-divide"></div></span>
+							<span class="text-danger">拾獲棄兔</span>
+							<span><div class="s-divide"></div></span>
+							新北市鶯歌區馬路邊拾獲一兔						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=148>
+						<li class="announceWording">
+							<span class="text-secondary">2023-12-11<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=147>
+						<li class="announceWording">
+							<span class="text-secondary">2023-12-11<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=146>
+						<li class="announceWording">
+							<span class="text-secondary">2023-11-14<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=145>
+						<li class="announceWording">
+							<span class="text-secondary">2023-11-14<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=144>
+						<li class="announceWording">
+							<span class="text-secondary">2023-10-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=143>
+						<li class="announceWording">
+							<span class="text-secondary">2023-10-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=142>
+						<li class="announceWording">
+							<span class="text-secondary">2023-09-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=141>
+						<li class="announceWording">
+							<span class="text-secondary">2023-09-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=140>
+						<li class="announceWording">
+							<span class="text-secondary">2023-08-30<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=139>
+						<li class="announceWording">
+							<span class="text-secondary">2023-08-30<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=138>
+						<li class="announceWording">
+							<span class="text-secondary">2023-08-24<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=137>
+						<li class="announceWording">
+							<span class="text-secondary">2023-08-24<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=136>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料暨收支一覽表公開徵信資料						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=135>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料暨收支一覽表公開徵信資料						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=134>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-19<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料暨收支一覽表公開徵信資料						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=133>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=132>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=131>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=130>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=129>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=128>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=127>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2023年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=126>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2023年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=125>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年12月27日至2023年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=124>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022-2023流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年12月27日至2023年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=123>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動募得款使用情形成果報告書						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=122>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動收支明細表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=121>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2022年協會收支一覽表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=120>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2023年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=119>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2022年12月27日至2023年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=118>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=117>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=116>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=115>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=114>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=113>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=112>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=111>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=110>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=109>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=108>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=107>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=106>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=105>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=104>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=103>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=102>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=101>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=100>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=99>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=98>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2022年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=97>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2022年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=96>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年12月27日至2022年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=95>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021-2022流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年12月27日至2022年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=94>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動收支明細表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=93>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動募得款使用情形成果報告書						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=92>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2021年協會收支一覽表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=91>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2022年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=90>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2022年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=89>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2022年1月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=88>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=87>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=86>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=85>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=84>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=83>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=82>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=81>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=80>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=79>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=78>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=77>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=76>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=75>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=74>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=73>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=72>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=71>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							 2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=70>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=69>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=68>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2021年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=67>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2021年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=66>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年12月27日至2021年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=65>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020-2021流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年12月27日至2021年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=64>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動募得款使用情形成果報告書						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=63>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動收支明細表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=62>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2020年協會收支一覽表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=61>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2021年1月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=60>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動支出一覽表-2020年12月27日至12月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=59>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=58>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年12月1日至12月26日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=57>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=56>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=55>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=54>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=53>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=52>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=51>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=50>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=49>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=48>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=47>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=46>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=45>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=44>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=43>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=42>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=41>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=40>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=39>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2020年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=38>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2020年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=37>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動捐贈人資料-2019年12月27日至2020年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=36>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019-2020流浪兔、受虐兔救助工作公益勸募活動暨義賣收支一覽表-2019年12月27日至2020年1月31日						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=35>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							2019年協會收支一覽表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=34>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動募得款使用情形成果報告書						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=33>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動收支明細表						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=32>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動支出一覽表-109年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=31>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動支出一覽表-109年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=30>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動支出一覽表-109年1月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=29>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年12月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=28>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年12月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=27>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=26>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年11月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=25>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=24>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年10月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=23>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=22>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年9月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=21>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=20>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年8月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=19>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=18>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年7月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=17>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=16>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年6月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=15>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=14>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=13>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年5月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=12>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=11>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年4月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=10>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=9>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年3月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=8>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=7>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年2月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=6>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動暨義賣收支一覽表-108年1月份						</li>
+					</a>
+				</div>
+				<hr>
+							<div>
+					<a href=announcement_details.php?id=4>
+						<li class="announceWording">
+							<span class="text-secondary">2023-07-17<div class="s-divide"></div></span>
+							<span class="text-danger">公益募款</span>
+							<span><div class="s-divide"></div></span>
+							107年流浪兔、受虐兔救援安置收容醫療照護及安排送養等救助工作公益勸募活動捐贈人資料-108年1月份						</li>
+					</a>
+				</div>
+				<hr>
+					</ul>
+	</div>
+	
+	<!-- import footer -->	
+	<div id="footer">
+		<script> 
+		    $("#footer").load("components/footer2.html");
+		</script> 
+	</div>
+</body>
+</html>

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Calendar, ArrowLeft, Share2 } from "lucide-react";
 import { notFound } from "next/navigation";
+import { format } from "date-fns";
+import { PostCover } from "@/components/ui/post-cover";
 
 export const revalidate = 60; // Revalidate every minute
 
@@ -35,7 +37,7 @@ export default async function PostPage({ params }: PostPageProps) {
             className="text-stone-500 hover:text-orange-600 pl-0"
             asChild
           >
-            <Link href="/posts?category=news">
+            <Link href="/posts">
               <ArrowLeft className="w-4 h-4 mr-2" />
               返回列表
             </Link>
@@ -48,7 +50,14 @@ export default async function PostPage({ params }: PostPageProps) {
             variant="secondary"
             className="bg-orange-50 text-orange-600 hover:bg-orange-100 mb-4 px-3 py-1 text-sm"
           >
-            {post.category === "news" ? "公告" : "紀錄"}
+            {{
+              top: "置頂",
+              found: "拾獲",
+              fundraising: "募款",
+              event: "活動",
+              news: "公告",
+              knowledge: "知識",
+            }[post.category as string] || "公告"}
           </Badge>
           <h1 className="text-3xl md:text-5xl font-bold font-noto-sans-tc text-stone-900 mb-6 leading-tight">
             {post.title}
@@ -56,7 +65,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="flex items-center justify-center text-stone-500 gap-6 text-sm">
             <div className="flex items-center">
               <Calendar className="w-4 h-4 mr-2" />
-              {new Date(post.published_at).toLocaleDateString()}
+              {format(new Date(post.published_at), "yyyy/MM/dd")}
             </div>
             {/* Social Share Placeholder */}
             <Button
@@ -71,16 +80,13 @@ export default async function PostPage({ params }: PostPageProps) {
         </header>
 
         {/* Cover Image */}
-        {post.cover_image && (
-          <div className="w-full aspect-video rounded-2xl overflow-hidden mb-12 shadow-lg bg-stone-100">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.cover_image}
-              alt={post.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
+        <div className="w-full aspect-video rounded-2xl overflow-hidden mb-12 shadow-lg bg-stone-100">
+          <PostCover
+            src={post.cover_image}
+            alt={post.title}
+            category={post.category}
+          />
+        </div>
 
         {/* Content */}
         <div className="prose prose-lg max-w-none prose-stone prose-headings:font-noto-sans-tc prose-headings:font-bold prose-img:rounded-xl prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">

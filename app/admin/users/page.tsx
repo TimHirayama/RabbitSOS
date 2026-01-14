@@ -13,6 +13,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import { format } from "date-fns";
 
 export default async function AdminUsersPage() {
   const supabase = await createClient();
@@ -69,7 +70,7 @@ export default async function AdminUsersPage() {
         <CreateVolunteerDialog currentUserRole={profile?.role} />
       </div>
 
-      <Card className="border-none shadow-sm bg-white/60 backdrop-blur-sm">
+      <Card className="border-none shadow-sm bg-white backdrop-blur-sm">
         <Table>
           <TableHeader className="bg-transparent hover:bg-transparent">
             <TableRow className="hover:bg-transparent border-gray-100">
@@ -162,7 +163,7 @@ export default async function AdminUsersPage() {
                   {p.phone || "-"}
                 </TableCell>
                 <TableCell className="text-gray-400 text-xs">
-                  {new Date(p.created_at).toLocaleDateString()}
+                  {format(new Date(p.created_at), "yyyy/MM/dd")}
                 </TableCell>
                 <TableCell className="pr-6">
                   <EditUserSheet

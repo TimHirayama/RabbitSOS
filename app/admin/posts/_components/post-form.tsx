@@ -92,15 +92,18 @@ export function PostForm({ initialData }: PostFormProps) {
             <Label htmlFor="category">分類</Label>
             <Select
               name="category"
-              defaultValue={initialData?.category || "news"}
+              defaultValue={initialData?.category || "top"}
             >
               <SelectTrigger>
                 <SelectValue placeholder="選擇分類" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="news">最新消息 (News)</SelectItem>
-                <SelectItem value="knowledge">衛教知識 (Knowledge)</SelectItem>
-                <SelectItem value="event">活動公告 (Event)</SelectItem>
+                <SelectItem value="top">置頂 (Top)</SelectItem>
+                <SelectItem value="found">拾獲棄兔 (Found)</SelectItem>
+                <SelectItem value="fundraising">
+                  公益募款 (Fundraising)
+                </SelectItem>
+                <SelectItem value="event">活動 (Event)</SelectItem>
               </SelectContent>
             </Select>
           </div>

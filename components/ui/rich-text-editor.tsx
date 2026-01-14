@@ -50,7 +50,6 @@ export function RichTextEditor({
     "strike",
     "blockquote",
     "list",
-    "bullet",
     "indent",
     "link",
     "image",

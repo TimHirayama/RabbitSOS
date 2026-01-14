@@ -26,11 +26,11 @@ export default async function FundraisingPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">募資進度管理</h1>
       </div>
-      <div className="max-w-2xl">
+      <div>
         <FundraisingForm initialData={initialData} />
       </div>
     </div>
