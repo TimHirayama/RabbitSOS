@@ -20,6 +20,7 @@ import {
 import { getDailyPhotos } from "@/app/admin/rabbits/daily-photo-actions";
 import { MainGallery } from "./_components/main-gallery";
 import { DailyPhotosGrid } from "./_components/daily-photos-grid";
+import { AdoptionButton } from "./_components/adoption-button";
 
 export default async function RabbitDetailPage({
   params,
@@ -40,6 +41,7 @@ export default async function RabbitDetailPage({
     .from("rabbits")
     .select("*")
     .eq("id", id)
+    .is("deleted_at", null)
     .single();
 
   const dailyPhotos = await getDailyPhotos(id);
@@ -125,7 +127,6 @@ export default async function RabbitDetailPage({
                     </span>
                   </div>
                 </div>
-
                 {/* Info Grid with Icons */}
                 <div className="grid grid-cols-2 gap-x-6 gap-y-6 mb-8 mt-4">
                   <InfoItem
@@ -167,15 +168,12 @@ export default async function RabbitDetailPage({
                     value={rabbit.feed_type || "不挑食"}
                   />
                 </div>
-
                 <div className="flex gap-4 pt-4 border-t border-stone-100 mt-auto">
-                  <Button
-                    size="lg"
-                    className="flex-1 rounded-full text-lg font-bold shadow-md shadow-orange-100"
-                    disabled={rabbit.status !== "open"}
-                  >
-                    {rabbit.status === "open" ? "申請認養" : "暫停認養"}
-                  </Button>
+                  <AdoptionButton
+                    rabbitId={rabbit.id}
+                    rabbitName={rabbit.name}
+                    status={rabbit.status}
+                  />
                   <Button
                     size="lg"
                     variant="outline"

@@ -20,6 +20,7 @@ export async function FeaturedRabbits() {
       "id, name, gender, age_year, location, image_urls, weight, breed, age_category, description"
     )
     .eq("status", "open")
+    .is("deleted_at", null)
     .order("created_at", { ascending: false })
     .limit(6);
 
